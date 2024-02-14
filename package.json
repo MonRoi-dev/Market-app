@@ -1,14 +1,14 @@
 {
-  "name": "my-app",
+  "name": "market-app",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.mjs",
   "scripts": {
     "start": "node app.mjs",
     "dev": "nodemon app.mjs"
   },
   "keywords": [],
-  "author": "",
+  "author": "David Arutiunyan",
   "license": "ISC",
   "dependencies": {
     "ejs": "^3.1.9",
