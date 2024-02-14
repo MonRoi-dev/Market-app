@@ -1,0 +1,75 @@
+<%- include('partials/head') %> <%- include('partials/navbar') %>
+<body>
+	<form action="/register" method="post">
+		<div class="container">
+			<div class="row">
+				<div class="col s8 offset-s2">
+					<div class="card">
+						<div class="card-content">
+							<h5 class="center-align"><b>Registration</b></h5>
+							<div class="row">
+								<div class="input-field col s6">
+									<input
+										id="first_name"
+										name="first_name"
+										type="text"
+										class="validate"
+										required=""
+										aria-required="true"
+									/>
+									<label for="first_name">First Name</label>
+								</div>
+								<div class="input-field col s6">
+									<input
+										id="last_name"
+										name="last_name"
+										type="text"
+										class="validate"
+										required=""
+										aria-required="true"
+									/>
+									<label for="last_name">Last Name</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12">
+									<input
+										id="email"
+										name="email"
+										type="email"
+										class="validate"
+										required=""
+										aria-required="true"
+									/>
+									<label for="email">Email</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12">
+									<input
+										id="password"
+										name="password"
+										type="password"
+										class="validate"
+										required=""
+										aria-required="true"
+									/>
+									<label for="password">Password</label>
+								</div>
+							</div>
+						</div>
+						<div class="card-action center-align">
+							<button
+								type="submit"
+								class="btn waves-effect waves-light hoverable"
+							>
+								Register
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<%- include('partials/footer') %>
+</body>
