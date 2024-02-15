@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import 'dotenv/config';
+import cookieParser from 'cookie-parser';
 import mainRouter from './routes/mainRoute.mjs';
 import loginRouter from './routes/loginRoute.mjs';
 import registerRouter from './routes/registerRoute.mjs';
@@ -15,6 +16,7 @@ const __dirname = path.dirname(__filename);
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 app.use(mainRouter);
 app.use(loginRouter);
