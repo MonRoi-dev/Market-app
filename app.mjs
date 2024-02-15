@@ -1,5 +1,5 @@
 import express from 'express';
-import ejs from 'ejs';
+import mongoose from 'mongoose'
 import path from 'path';
 import { fileURLToPath } from 'url';
 import mainRouter from './routes/mainRoute.mjs';
@@ -19,6 +19,16 @@ app.use(mainRouter);
 app.use(loginRouter);
 app.use(registerRouter);
 
+//Connection to db and run server
+async function start(){
+	try{
+		await mongoose.connect('mongodb+srv://monroidev:TheFinalCut27@cluster0.5rh7ltl.mongodb.net/?retryWrites=true&w=majority')
+		app.listen(PORT, () => console.log(`Server was started on port: ${PORT}`))
+	}catch(err){
+		console.log(err)
+	}
+}
+
 //Error handlers
 app.use(function (req, res, next) {
 	res.status(404).render('notFoundPage', {
@@ -32,6 +42,4 @@ app.use(function (err, req, res, next) {
 	res.status(500).send('Something broke!');
 });
 
-app.listen(PORT, () => {
-	console.log(`Server was started on port: ${PORT}`);
-})
+start()
