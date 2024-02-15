@@ -8,7 +8,7 @@ router.get('/register', registerController.getRegister)
 router.post('/register', [
     check('first_name', 'First name should not be empty').notEmpty(),
     check('last_name', 'Last name should not be empty').notEmpty(),
-    check('email', 'Invalid email type').notEmpty().isEmail(),
+    check('email', 'Invalid email type').isEmail(),
     check('password', 'Password should not be empty').isLength({
         min: 4,
         max: 16,

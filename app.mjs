@@ -1,13 +1,14 @@
 import express from 'express';
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import 'dotenv/config';
 import mainRouter from './routes/mainRoute.mjs';
 import loginRouter from './routes/loginRoute.mjs';
 import registerRouter from './routes/registerRoute.mjs';
 
 const app = express();
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -20,12 +21,14 @@ app.use(loginRouter);
 app.use(registerRouter);
 
 //Connection to db and run server
-async function start(){
-	try{
-		await mongoose.connect('mongodb+srv://monroidev:TheFinalCut27@cluster0.5rh7ltl.mongodb.net/?retryWrites=true&w=majority')
-		app.listen(PORT, () => console.log(`Server was started on port: ${PORT}`))
-	}catch(err){
-		console.log(err)
+async function start() {
+	try {
+		await mongoose.connect(process.env.URL);
+		app.listen(PORT, () =>
+			console.log(`Server was started on port: ${PORT}`)
+		);
+	} catch (err) {
+		console.log(err);
 	}
 }
 
@@ -42,4 +45,4 @@ app.use(function (err, req, res, next) {
 	res.status(500).send('Something broke!');
 });
 
-start()
+start();
