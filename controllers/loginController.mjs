@@ -23,14 +23,15 @@ class Login {
 		try {
 			const errors = validationResult(req);
 			if (!errors.isEmpty()) {
+				const msg = errors.errors[0].msg
 				return res
 					.status(400)
-					.json({ message: 'Authorization error', errors });
+					.json({ message: msg });
 			}
 			const userData = req.body;
 			const user = await User.findOne({ email: userData.email });
 
-			if (user.length === 0) {
+			if (!user) {
 				return res.status(400).json({ message: 'User not found' });
 			}
 
