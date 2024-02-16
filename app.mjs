@@ -7,6 +7,7 @@ import cookieParser from 'cookie-parser';
 import mainRouter from './routes/mainRoute.mjs';
 import loginRouter from './routes/loginRoute.mjs';
 import registerRouter from './routes/registerRoute.mjs';
+import userRouter from './routes/userRoute.mjs';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -21,6 +22,7 @@ app.use(cookieParser());
 app.use(mainRouter);
 app.use(loginRouter);
 app.use(registerRouter);
+app.use(userRouter);
 
 //Connection to db and run server
 async function start() {

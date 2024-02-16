@@ -2,10 +2,18 @@
 	<nav>
 		<div class="nav-wrapper">
 			<a href="/" class="brand-logo">Market</a>
-			<ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li <%- title === 'Login' ? 'class="active"' : '' %>><a href="/login">Login</a></li>
-				<li <%- title === 'Registration' ? 'class="active"' : '' %>><a href="/register">Regin</a></li>
-            </ul>
+			<% if(token) {%>
+				<ul id="nav-mobile" class="right hide-on-med-and-down">
+					<li <%- title === 'Profile' ? 'class="active"' : '' %>><a href="/user"><i class="material-icons">account_circle</i></a></li>
+					<!-- <li <%- title === 'Registration' ? 'class="active"' : '' %>><a href="/register">Cart</a></li> -->
+				</ul>
+			<% }else{ %>
+				<ul id="nav-mobile" class="right hide-on-med-and-down">
+					<li <%- title === 'Login' ? 'class="active"' : '' %>><a href="/login">Login</a></li>
+					<li <%- title === 'Registration' ? 'class="active"' : '' %>><a href="/register">Regin</a></li>
+				</ul>
+			<% } %>
+
 		</div>
 	</nav>
 </head>

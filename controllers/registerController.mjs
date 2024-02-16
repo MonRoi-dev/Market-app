@@ -5,7 +5,7 @@ import {validationResult} from 'express-validator'
 class Register {
 	async getRegister(req, res) {
 		try {
-			res.render('register', { title: 'Registration' });
+			res.render('register', { title: 'Registration', token: req.cookies.jwt });
 		} catch (err) {
 			res.status(500).json({message: `Server Error: ${err}`})
 		}

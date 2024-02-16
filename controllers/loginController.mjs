@@ -14,7 +14,7 @@ function generateAccessToken(id) {
 class Login {
 	async getLogin(req, res) {
 		try {
-			res.render('login', { title: 'Login' });
+			res.render('login', { title: 'Login', token: req.cookies.jwt});
 		} catch (err) {
 			res.status(500).json({ message: `Server Error: ${err}` });
 		}
@@ -23,10 +23,8 @@ class Login {
 		try {
 			const errors = validationResult(req);
 			if (!errors.isEmpty()) {
-				const msg = errors.errors[0].msg
-				return res
-					.status(400)
-					.json({ message: msg });
+				const msg = errors.errors[0].msg;
+				return res.status(400).json({ message: msg });
 			}
 			const userData = req.body;
 			const user = await User.findOne({ email: userData.email });
