@@ -20,6 +20,15 @@ class User{
             res.status(500).json({message: `Server Error: ${err}`})
         }
     }
+
+    async signOut(req, res){
+        try{
+            res.clearCookie('jwt')
+            res.redirect('/')
+        }catch(err){
+           res.status(500).json({message: `Server Error: ${err}`}) 
+        }
+    }
 }
 
 export default new User()
