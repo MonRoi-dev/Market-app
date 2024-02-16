@@ -3,6 +3,12 @@
 		<div class="nav-wrapper">
 			<a href="/" class="brand-logo">Market</a>
 			<% if(token) {%>
+				<% if(role === 'ADMIN') {%>
+					<ul id="nav-mobile" class="right hide-on-med-and-down">
+						<li <%- title === 'Profile' ? 'class="active"' : '' %>><a href="/user">Admin panel</a></li>
+						
+					</ul>
+				<% } %>
 				<ul id="nav-mobile" class="right hide-on-med-and-down">
 					<li <%- title === 'Profile' ? 'class="active"' : '' %>><a href="/user"><i class="material-icons">account_circle</i></a></li>
 					<!-- <li <%- title === 'Registration' ? 'class="active"' : '' %>><a href="/register">Cart</a></li> -->
@@ -17,3 +23,4 @@
 	</nav>
 </head>
 <main>
+

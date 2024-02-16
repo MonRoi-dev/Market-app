@@ -4,9 +4,10 @@ import { validationResult } from 'express-validator';
 import jwt from 'jsonwebtoken';
 import 'dotenv/config';
 
-function generateAccessToken(id) {
+function generateAccessToken(id, role) {
 	const payload = {
 		id,
+		role,
 	};
 	return jwt.sign(payload, process.env.SECRET, { expiresIn: '24h' });
 }
@@ -14,7 +15,7 @@ function generateAccessToken(id) {
 class Login {
 	async getLogin(req, res) {
 		try {
-			res.render('login', { title: 'Login', token: req.cookies.jwt});
+			res.render('login', { title: 'Login'});
 		} catch (err) {
 			res.status(500).json({ message: `Server Error: ${err}` });
 		}
@@ -41,7 +42,7 @@ class Login {
 			if (!comparePasswords) {
 				return res.status(400).json({ message: 'Wrong password' });
 			}
-			const token = generateAccessToken(user.id);
+			const token = generateAccessToken(user.id, user.role);
 			res.cookie('jwt', token);
 			res.redirect('/');
 		} catch (err) {

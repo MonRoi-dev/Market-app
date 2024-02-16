@@ -17,6 +17,11 @@ const schema = new Schema({
         type: String,
         require: true
     },
+    role: {
+        type: String,
+        require: true,
+        default: 'USER'
+    },
     ctreatedAt: {
         type: Date,
         default: Date.now()

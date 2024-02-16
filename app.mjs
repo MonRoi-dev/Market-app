@@ -8,6 +8,7 @@ import mainRouter from './routes/mainRoute.mjs';
 import loginRouter from './routes/loginRoute.mjs';
 import registerRouter from './routes/registerRoute.mjs';
 import userRouter from './routes/userRoute.mjs';
+import { setToken, setRole } from './middlewares/tokenMiddleware.mjs';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -18,6 +19,7 @@ app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(setToken, setRole);
 
 app.use(mainRouter);
 app.use(loginRouter);

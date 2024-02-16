@@ -1,8 +1,7 @@
 class Main{
     getMain(req, res){
         res.render('index', {
-            title: 'Express app',
-            token: req.cookies.jwt
+            title: 'Express app'
         });
     }
 }

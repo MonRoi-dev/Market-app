@@ -1,5 +1,5 @@
 import UserModel from '../models/userModel.mjs';
-import jwt, { decode } from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 import 'dotenv/config';
 
 class User{
@@ -15,7 +15,7 @@ class User{
                 name: userData.first_name + ' ' + userData.last_name,
                 email: userData.email
             }
-            res.render('user', {title: 'Profile',  token: req.cookies.jwt, data: clientData})
+            res.render('user', {title: 'Profile', data: clientData})
         }catch(err){
             res.status(500).json({message: `Server Error: ${err}`})
         }
