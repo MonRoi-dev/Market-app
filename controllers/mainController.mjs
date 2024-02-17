@@ -4,7 +4,6 @@ class Main{
     async getMain(req, res){
             try{
                 const getAllProducts = await ProductModel.find({})
-                console.log(getAllProducts)
                 res.render('index', {
                     title: 'Market app',
                     products: getAllProducts

@@ -1,6 +1,5 @@
 <%- include('partials/head') %>
 <%- include('partials/navbar') %>
-
     <body>
         <div class="container">
             <div class="row">
@@ -10,12 +9,8 @@
                             <span class="card-title"><%= data.name %></span>
                             <div class="row valign-wrapper">
                                 <div class="col s10">
-                                    <p>Email: <%= data.email %></p>
-                                </div>
-                                <div class="col s2">
-                                    <form method="post" action="/user">
-                                        <button type="submit" class="btn">Sign Out</button>
-                                    </form>
+                                    <p>Info: <%= data.info %></p>
+                                    <p>Price: <%= data.price %></p>
                                 </div>
                             </div>
                         </div>
@@ -23,6 +18,5 @@
                 </div>
             </div>
         </div>
-
 	<%- include('partials/footer') %>
 </body>
