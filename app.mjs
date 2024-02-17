@@ -8,6 +8,7 @@ import mainRouter from './routes/mainRoute.mjs';
 import loginRouter from './routes/loginRoute.mjs';
 import registerRouter from './routes/registerRoute.mjs';
 import userRouter from './routes/userRoute.mjs';
+import productRouter from './routes/productRoute.mjs'
 import { setToken, setRole } from './middlewares/tokenMiddleware.mjs';
 
 const app = express();
@@ -25,7 +26,7 @@ app.use(mainRouter);
 app.use(loginRouter);
 app.use(registerRouter);
 app.use(userRouter);
-
+app.use('/admin', productRouter)
 //Connection to db and run server
 async function start() {
 	try {

@@ -1,7 +1,25 @@
 <%- include('partials/head') %>
 <%- include('partials/navbar') %>
 <body>
-	<h1 class="center-align">Hello World</h1>
+	<h1 class="center-align">Main Page</h1>
+	<div class="row">
+		<% for(let i = 0; i < products.length; i++) { %>
+		  <div class="col s12 m6 l3">
+			<div class="card">
+			  <div class="card-image">
+				<img src="<%= products[i].image %>">
+				<span class="card-title"><span class="black-text"><%= products[i].name %></span></span>
+			  </div>
+			  <div class="card-content">
+				<p><%= products[i].info %></p>
+			  </div>
+			  <div class="card-action">
+				<a href="#!"><%= products[i].price %></a>
+			  </div>
+			</div>
+		  </div>
+		<% } %>
+	  </div>
 
 	<%- include('partials/footer') %>
 </body>
