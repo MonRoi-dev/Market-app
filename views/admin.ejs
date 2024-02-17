@@ -1,0 +1,39 @@
+<%- include('partials/head') %>
+<%- include('partials/navbar') %>
+<body>
+        <div class="card">
+            <div class="card-content col s8 offset-s2">
+                <h5 class="center-align"><b>Admin Panel</b></h5>
+                <ul class="collection">
+                    <li><a href="#" id="openModal" class="collection-item btn">Create Product</a></li>
+                    <li><a href="#modal2" class="modal-trigger collection-item btn">Update Product</a></li>
+                    <li><a href="#modal3" class="modal-trigger collection-item btn">Delete Product</a></li>
+                    <li><a href="#modal4" class="modal-trigger collection-item btn">Show Users</a></li>
+                    <li><a href="#modal5" class="modal-trigger collection-item btn">Send Emails</a></li>
+                </ul>
+            </div>
+        </div>
+
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <form action="/submit" method="post">
+                <%- include('partials/createProduct') %>
+            </form>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            M.Modal.init(document.querySelectorAll('.modal'));
+            M.AutoInit();
+
+            var modal = document.getElementById('modal1');
+            var openModal = document.getElementById('openModal');
+
+            openModal.addEventListener('click', function() {
+                var instance = M.Modal.getInstance(modal);
+                instance.open();
+            });
+        });
+    </script>
+	<%- include('partials/footer') %>
+</body>

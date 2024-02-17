@@ -1,0 +1,63 @@
+    <div class="container">
+      <div class="row">
+              <h5 class="center-align"><b>Create new product</b></h5>
+              <div class="row">
+                <div class="input-field col s6">
+                  <input
+                    id="product_name"
+                    name="product_name"
+                    type="text"
+                    class="validate"
+                    required=""
+                    aria-required="true"
+                  />
+                  <label for="product_name">Name</label>
+                </div>
+                <div class="input-field col s6">
+                  <input
+                    id="product_price"
+                    name="product_price"
+                    type="text"
+                    pattern="\d*"
+                    class="validate"
+                    required=""
+                    aria-required="true"
+                  />
+                  <label for="product_price">Price (only digits)</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input
+                    id="image_link"
+                    name="image_link"
+                    type="url"
+                    class="validate"
+                    required=""
+                    aria-required="true"
+                  />
+                  <label for="image_link">Image link (URL)</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <textarea
+                    id="product_info"
+                    name="product_info"
+                    class="materialize-textarea"
+                    required=""
+                    aria-required="true"
+                  ></textarea>
+                  <label for="product_info">Info</label>
+                </div>
+              </div>
+            </div>
+            <div class="card-action center-align">
+              <button
+                type="submit"
+                class="btn waves-effect waves-light hoverable"
+              >
+                Create
+              </button>
+            </div>
+          </div>
