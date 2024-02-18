@@ -48,6 +48,17 @@ class Product {
 			res.status(500).json({ message: `Server Error: ${err}` });
 		}
 	}
+
+    async deleteProduct(req, res){
+        try{
+            const {id} = req.body
+            await ProductModel.findByIdAndDelete(id);
+			res.redirect('/');
+        }catch(err){
+            res.status(500).json({ message: `Server Error: ${err}` });
+        }
+    }
+
 }
 
 export default new Product();
