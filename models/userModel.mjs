@@ -22,7 +22,7 @@ const schema = new Schema({
         require: true,
         default: 'USER'
     },
-    ctreatedAt: {
+    createdAt: {
         type: Date,
         default: Date.now()
     }

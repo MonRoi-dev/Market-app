@@ -29,6 +29,15 @@ class User{
            res.status(500).json({message: `Server Error: ${err}`}) 
         }
     }
+
+    async getAllUsers(req, res){
+        try{
+            const users = await UserModel.find({})
+            res.render('users', {title: 'Users', users})
+        }catch(err){
+            res.status(500).json({message: `Server Error: ${err}`}) 
+        }
+    }
 }
 
 export default new User()
