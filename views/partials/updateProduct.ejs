@@ -1,0 +1,67 @@
+<form action="/admin/update" method="post">
+    <div class="container">
+      <div class="row">
+              <h5 class="center-align"><b>Update product</b></h5>
+              <div class="row">
+                <div class="input-field col s6">
+                    <input
+                      id="id"
+                      name="id"
+                      type="text"
+                      class="validate"
+                      required=""
+                      aria-required="true"
+                    />
+                    <label for="id">ID</label>
+                  </div>
+                <div class="input-field col s6">
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    class="validate"
+                  />
+                  <label for="name">Name</label>
+                </div>
+                <div class="input-field col s6">
+                  <input
+                    id="]price"
+                    name="price"
+                    type="text"
+                    class="validate"
+                  />
+                  <label for="price">Price (only digits)</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input
+                    id="image"
+                    name="image"
+                    type="url"
+                    class="validate"
+                  />
+                  <label for="image">Image link (URL)</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <textarea
+                    id="info"
+                    name="info"
+                    class="materialize-textarea"
+                  ></textarea>
+                  <label for="info">Info</label>
+                </div>
+              </div>
+            </div>
+            <div class="card-action center-align">
+              <button
+                type="submit"
+                class="btn waves-effect waves-light hoverable"
+              >
+                Update
+              </button>
+            </div>
+          </div>
+</form>
