@@ -21,6 +21,8 @@ const setRole = (req, res, next) => {
         if(token){
             const userJWT = jwt.verify(token, process.env.SECRET);
             req.app.locals.role = userJWT.role
+        }else{
+            req.app.locals.role = 'USER'
         }
     }catch(err){
         console.log(err)

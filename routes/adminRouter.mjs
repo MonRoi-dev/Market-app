@@ -5,7 +5,7 @@ import productController from '../controllers/productController.mjs'
 const router = Router()
 
 router.get('/users', userController.getAllUsers)
-router.post('/create', productController.createProduct)
+router.post('/product', productController.createProduct)
 router.put('/product/:id', productController.updateProduct)
 router.delete('/product/:id', productController.deleteProduct)
 

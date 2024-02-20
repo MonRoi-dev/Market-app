@@ -1,53 +1,53 @@
-<form action="/admin/create" method="post">
+<form action="/admin/product" method="post">
     <div class="container">
       <div class="row">
               <h5 class="center-align"><b>Create new product</b></h5>
               <div class="row">
                 <div class="input-field col s6">
                   <input
-                    id="product_name"
-                    name="product_name"
+                    id="name"
+                    name="name"
                     type="text"
                     class="validate"
                     required=""
                     aria-required="true"
                   />
-                  <label for="product_name">Name</label>
+                  <label for="name">Name</label>
                 </div>
                 <div class="input-field col s6">
                   <input
-                    id="product_price"
-                    name="product_price"
+                    id="price"
+                    name="price"
                     type="text"
                     pattern="\d*"
                     class="validate"
                     required=""
                     aria-required="true"
                   />
-                  <label for="product_price">Price (only digits)</label>
+                  <label for="price">Price (only digits)</label>
                 </div>
               </div>
               <div class="row">
                 <div class="input-field col s12">
                   <input
-                    id="image_link"
-                    name="image_link"
+                    id="image"
+                    name="image"
                     type="url"
                     class="validate"
                   />
-                  <label for="image_link">Image link (URL)</label>
+                  <label for="image">Image link (URL)</label>
                 </div>
               </div>
               <div class="row">
                 <div class="input-field col s12">
                   <textarea
-                    id="product_info"
-                    name="product_info"
+                    id="info"
+                    name="info"
                     class="materialize-textarea"
                     required=""
                     aria-required="true"
                   ></textarea>
-                  <label for="product_info">Info</label>
+                  <label for="info">Info</label>
                 </div>
               </div>
             </div>

@@ -4,14 +4,14 @@ class Product {
 	async createProduct(req, res) {
 		try {
 			const data = req.body;
-			if(!data.product_name){
-				res.status(400).json({ message: 'Missing id or name' });
+			if(!data.name){
+				res.status(400).json({ message: 'Missing Name' });
 			}
 			const product = new ProductModel({
-				name: data.product_name,
-				info: data.product_info,
-				image: data.image_link || undefined,
-				price: data.product_price,
+				name: data.name,
+				info: data.info,
+				image: data.image || undefined,
+				price: data.price,
 			});
 			await product.save();
 			res.redirect('/');

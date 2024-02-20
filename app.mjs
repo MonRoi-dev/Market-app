@@ -4,13 +4,13 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import 'dotenv/config';
 import cookieParser from 'cookie-parser';
-import methodOverride from 'method-override'
+import methodOverride from 'method-override';
 import mainRouter from './routes/mainRoute.mjs';
 import loginRouter from './routes/loginRoute.mjs';
 import registerRouter from './routes/registerRoute.mjs';
 import userRouter from './routes/userRoute.mjs';
-import adminRouter from './routes/adminRouter.mjs'
-import productRouter from './routes/productRoute.mjs'
+import adminRouter from './routes/adminRouter.mjs';
+import productRouter from './routes/productRoute.mjs';
 import { setToken, setRole } from './middlewares/tokenMiddleware.mjs';
 
 const app = express();
@@ -23,14 +23,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(setToken, setRole);
-app.use(methodOverride('_method'))
+app.use(methodOverride('_method'));
 
 app.use(mainRouter);
 app.use(loginRouter);
 app.use(registerRouter);
 app.use(userRouter);
-app.use('/admin', adminRouter)
-app.use(productRouter)
+app.use('/admin', adminRouter);
+app.use(productRouter);
 
 //Connection to db and run server
 async function start() {
