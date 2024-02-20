@@ -1,19 +1,8 @@
-<form action="/admin/update" method="post">
+<form method="post" action="/admin/product/<%= data.id %>?_method=PUT">
     <div class="container">
       <div class="row">
               <h5 class="center-align"><b>Update product</b></h5>
               <div class="row">
-                <div class="input-field col s6">
-                    <input
-                      id="id"
-                      name="id"
-                      type="text"
-                      class="validate"
-                      required=""
-                      aria-required="true"
-                    />
-                    <label for="id">ID</label>
-                  </div>
                 <div class="input-field col s6">
                   <input
                     id="name"
@@ -25,7 +14,7 @@
                 </div>
                 <div class="input-field col s6">
                   <input
-                    id="]price"
+                    id="price"
                     name="price"
                     type="text"
                     class="validate"

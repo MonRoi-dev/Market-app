@@ -1,28 +1,81 @@
-<%- include('partials/head') %> <%- include('partials/navbar') %>
+<%- include('partials/head') %> 
+<%- include('partials/navbar') %>
 <body>
-	<div class="row">
-		<% for(let i = 0; i < products.length; i++) { %>
-		<div class="col s12 m6 l3">
-			<div class="card medium">
-				<a href="/product/<%= products[i].id %>" style="color: black;">
-					<div class="card-image">
-						<img class="activator" src="<%= products[i].image %>" />
-					</div>
-				
-				<div class="card-content">
-					<span class="card-title">
-						<span class="black-text"><%= products[i].name %></span>
-					</span>
-					<p><%= products[i].info %></p>
+  <div class="row">
+    <div class="col s8 offset-s2">
+      <div class="row">
+        <div class="input-field col s10"> <!-- Уменьшил ширину поля ввода и кнопки, чтобы добавить кнопку на одном уровне -->
+          <i class="material-icons prefix">search</i>
+          <input type="text" id="searchbar" onkeyup="search()" name="search" class="autocomplete">
+          <label for="searchbar">Search</label>
+        </div>
+        <% if(role === 'ADMIN' && token) { %>
+			<!-- <li><a href="#" id="openModal" class="collection-item btn">Create Product</a></li> -->
+        <div class="input-field col s2">
+          <a class="btn-floating btn waves-effect waves-light" id="openModal" ><i class="material-icons">add</i></a>
+        </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
 
-					<div class="card-action">
-						<b><%= products[i].price %>  ₽</b>
-					</div>
-				</div>
-			</a>
-			</div>
-		</div>
-		<% } %>
+  <div class="row">
+    <% for(let i = 0; i < products.length; i++) { %>
+      <div class="col s12 m6 l3 products">
+        <div class="card medium">
+          <a href="/product/<%= products[i].id %>" style="color: black;">
+            <div class="card-image">
+              <img class="activator" src="<%= products[i].image %>" />
+            </div>
+            <div class="card-content">
+              <span class="card-title">
+                <span class="black-text"><%= products[i].name %></span>
+              </span>
+              <p><%= products[i].info %></p>
+              <div class="card-action">
+                <b><%= products[i].price %>  ₽</b>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    <% } %>
+  </div>
+  <%- include('partials/footer') %>
+
+  <div id="modal1" class="modal">
+	<div class="modal-content">
+			<%- include('partials/createProduct') %>
 	</div>
-	<%- include('partials/footer') %>
+</div>
+
+  <script>
+    function search() {
+      let input = document.getElementById('searchbar').value;
+      input = input.toLowerCase();
+      let x = document.getElementsByClassName('products');
+      
+      for (let i = 0; i < x.length; i++) {
+        if (!x[i].textContent.toLowerCase().includes(input)) {
+          x[i].style.display = "none";
+        } else {
+          x[i].style.display = "block";
+        }
+      }
+    }
+
+	document.addEventListener('DOMContentLoaded', function() {
+            M.Modal.init(document.querySelectorAll('.modal'));
+            M.AutoInit();
+
+            var modal = document.getElementById('modal1');
+            var openModal = document.getElementById('openModal');
+
+            openModal.addEventListener('click', function() {
+                var instance = M.Modal.getInstance(modal);
+                instance.open();
+            });
+        });
+
+  </script>
 </body>

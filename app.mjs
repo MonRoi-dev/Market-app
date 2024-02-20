@@ -4,6 +4,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import 'dotenv/config';
 import cookieParser from 'cookie-parser';
+import methodOverride from 'method-override'
 import mainRouter from './routes/mainRoute.mjs';
 import loginRouter from './routes/loginRoute.mjs';
 import registerRouter from './routes/registerRoute.mjs';
@@ -22,6 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(setToken, setRole);
+app.use(methodOverride('_method'))
 
 app.use(mainRouter);
 app.use(loginRouter);

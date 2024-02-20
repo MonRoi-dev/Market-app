@@ -5,30 +5,12 @@
             <div class="card-content col s8 offset-s2">
                 <h5 class="center-align"><b>Admin Panel</b></h5>
                 <ul class="collection">
-                    <li><a href="#" id="openModal" class="collection-item btn">Create Product</a></li>
-                    <li><a href="#modal2" class="modal-trigger collection-item btn">Update Product</a></li>
-                    <li><a href="#modal3" class="modal-trigger collection-item btn">Delete Product</a></li>
                     <li><a href="/admin/users" class="modal-trigger collection-item btn">Show Users</a></li>
                     <li><a href="#modal5" class="modal-trigger collection-item btn">Send Emails</a></li>
                 </ul>
             </div>
         </div>
 
-    <div id="modal1" class="modal">
-        <div class="modal-content">
-                <%- include('partials/createProduct') %>
-        </div>
-    </div>
-        <div id="modal2" class="modal">
-        <div class="modal-content">
-                <%- include('partials/updateProduct') %>
-        </div>
-    </div>
-    <div id="modal3" class="modal">
-        <div class="modal-content">
-                <%- include('partials/deleteProduct') %>
-        </div>
-    </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             M.Modal.init(document.querySelectorAll('.modal'));

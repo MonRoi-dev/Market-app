@@ -4,7 +4,7 @@ class Product {
 	async createProduct(req, res) {
 		try {
 			const data = req.body;
-			if(!data.id || !data.name){
+			if(!data.product_name){
 				res.status(400).json({ message: 'Missing id or name' });
 			}
 			const product = new ProductModel({
@@ -25,6 +25,7 @@ class Product {
 			const id = req.params.id;
 			const product = await ProductModel.findById(id);
 			const data = {
+				id,
 				name: product.name,
 				info: product.info,
 				price: product.price,
@@ -38,8 +39,9 @@ class Product {
 
 	async updateProduct(req, res) {
 		try {
+			const id = req.params.id
 			const data = req.body;
-			if(!data.id){
+			if(!id){
 				res.status(400).json({ message: 'Missing data' });
 			}
             let dataToUpdate = {}
@@ -48,7 +50,7 @@ class Product {
                     dataToUpdate[key] = value
                 }
               }
-			await ProductModel.findByIdAndUpdate(dataToUpdate.id, dataToUpdate,{ new: true });
+			await ProductModel.findByIdAndUpdate(id, dataToUpdate,{ new: true });
 			res.redirect('/');
 		} catch (err) {
 			res.status(500).json({ message: `Server Error: ${err}` });
@@ -57,7 +59,7 @@ class Product {
 
     async deleteProduct(req, res){
         try{
-            const {id} = req.body
+            const {id} = req.params
 			if(!id){
 				res.status(400).json({ message: 'Missing id' });
 			}
