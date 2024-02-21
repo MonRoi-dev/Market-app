@@ -16,7 +16,7 @@ class Product {
 			await product.save();
 			res.redirect('/');
 		} catch (err) {
-			res.status(500).json({ message: `Server Error: ${err}` });
+			res.status(500).render('serverErrorPage', {message: `Server Error: ${err}`, title: 'Error'})
 		}
 	}
 
@@ -36,7 +36,7 @@ class Product {
 			}
 			res.render('product', { title: product.name, data: product });
 		} catch (err) {
-			res.status(500).json({ message: `Server Error: ${err}` });
+			res.status(500).render('serverErrorPage', {message: `Server Error: ${err}`, title: 'Error'})
 		}
 	}
 
@@ -56,7 +56,7 @@ class Product {
 			await ProductModel.findByIdAndUpdate(id, dataToUpdate,{ new: true });
 			res.redirect('/');
 		} catch (err) {
-			res.status(500).json({ message: `Server Error: ${err}` });
+			res.status(500).render('serverErrorPage', {message: `Server Error: ${err}`, title: 'Error'})
 		}
 	}
 
@@ -69,7 +69,7 @@ class Product {
             await ProductModel.findByIdAndDelete(id);
 			res.redirect('/');
         }catch(err){
-            res.status(500).json({ message: `Server Error: ${err}` });
+            res.status(500).render('serverErrorPage', {message: `Server Error: ${err}`, title: 'Error'})
         }
     }
 

@@ -17,7 +17,7 @@ class Login {
 		try {
 			res.render('login', { title: 'Login'});
 		} catch (err) {
-			res.status(500).json({ message: `Server Error: ${err}` });
+			res.status(500).render('serverErrorPage', {message: `Server Error: ${err}`, title: 'Error'})
 		}
 	}
 	async postLogin(req, res) {
@@ -46,7 +46,7 @@ class Login {
 			res.cookie('jwt', token);
 			res.redirect('/');
 		} catch (err) {
-			res.status(500).json({ message: `Server Error: ${err}` });
+			res.status(500).render('serverErrorPage', {message: `Server Error: ${err}`, title: 'Error'})
 		}
 	}
 }

@@ -18,7 +18,7 @@ class User {
 			};
 			res.render('user', { title: 'Profile', data: clientData });
 		} catch (err) {
-			res.status(500).json({ message: `Server Error: ${err}` });
+			res.status(500).render('serverErrorPage', {message: `Server Error: ${err}`, title: 'Error'})
 		}
 	}
 
@@ -27,7 +27,7 @@ class User {
 			res.clearCookie('jwt');
 			res.redirect('/');
 		} catch (err) {
-			res.status(500).json({ message: `Server Error: ${err}` });
+			res.status(500).render('serverErrorPage', {message: `Server Error: ${err}`, title: 'Error'})
 		}
 	}
 
@@ -36,7 +36,7 @@ class User {
 			const users = await UserModel.find({});
 			res.render('users', { title: 'Users', users });
 		} catch (err) {
-			res.status(500).json({ message: `Server Error: ${err}` });
+			res.status(500).render('serverErrorPage', {message: `Server Error: ${err}`, title: 'Error'})
 		}
 	}
 
@@ -62,7 +62,7 @@ class User {
 			}
 			res.redirect('/user/cart');
 		} catch (err) {
-			res.status(500).json({ message: `Server Error: ${err}` });
+			res.status(500).render('serverErrorPage', {message: `Server Error: ${err}`, title: 'Error'})
 		}
 	}
 
@@ -80,7 +80,7 @@ class User {
 				res.render('cart', { title: 'Cart', products, cart: user.cart });
 			}
 		} catch (err) {
-			res.status(500).json({ message: `Server Error: ${err}` });
+			res.status(500).render('serverErrorPage', {message: `Server Error: ${err}`, title: 'Error'})
 		}
 	}
 
@@ -101,7 +101,7 @@ class User {
                 res.redirect('/user/cart')
             }
         }catch(err){
-            res.status(500).json({ message: `Server Error: ${err}` });
+            res.status(500).render('serverErrorPage', {message: `Server Error: ${err}`, title: 'Error'})
         }
     }
 

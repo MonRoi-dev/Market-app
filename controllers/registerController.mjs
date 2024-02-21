@@ -7,7 +7,7 @@ class Register {
 		try {
 			res.render('register', { title: 'Registration'});
 		} catch (err) {
-			res.status(500).json({message: `Server Error: ${err}`})
+			res.status(500).render('serverErrorPage', {message: `Server Error: ${err}`, title: 'Error'})
 		}
 	}
 	async postRegister(req, res) {
@@ -37,7 +37,7 @@ class Register {
 			}
 			res.redirect('/');
 		} catch (err) {
-			res.status(500).json({message: `Server Error: ${err}`})
+			res.status(500).render('serverErrorPage', {message: `Server Error: ${err}`, title: 'Error'})
 		}
 	}
 }
