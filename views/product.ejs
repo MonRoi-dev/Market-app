@@ -17,7 +17,8 @@
                             </div>
                         </div>
                     </div>
-                    <% if(token && role === 'ADMIN') { %>
+                    <% if(token) { %>
+                    <% if(role === 'ADMIN') { %>
                     <div class="card-action">
                         <div class="row">
                             <div class="col">
@@ -30,6 +31,10 @@
                             </div>
                         </div>
                     </div>
+                    <% } %>
+                    <form method="post" action="/product/<%= data.id %>">
+                        <button type="submit" class="waves-effect waves-light btn">Add to Cart</button>
+                    </form>
                     <% } %>
                 </div>
             </div>

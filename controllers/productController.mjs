@@ -23,15 +23,18 @@ class Product {
 	async getProduct(req, res) {
 		try {
 			const id = req.params.id;
+			if(id.length !== 24){
+				return res.status(404).render('notFoundPage', {
+					title: 'Page not found'
+				});
+			}
 			const product = await ProductModel.findById(id);
-			const data = {
-				id,
-				name: product.name,
-				info: product.info,
-				price: product.price,
-				image: product.image,
-			};
-			res.render('product', { title: data.name, data });
+			if(!product){
+				return res.status(404).render('notFoundPage', {
+					title: 'Page not found'
+				});
+			}
+			res.render('product', { title: product.name, data: product });
 		} catch (err) {
 			res.status(500).json({ message: `Server Error: ${err}` });
 		}

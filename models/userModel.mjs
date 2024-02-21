@@ -22,6 +22,16 @@ const schema = new Schema({
         require: true,
         default: 'USER'
     },
+    cart: [{
+        productId: {
+        type: Schema.Types.ObjectId,
+            },
+        qnty: {
+            type: Number,
+            default: 1
+        }
+        },
+    ],
     createdAt: {
         type: Date,
         default: Date.now()
