@@ -13,6 +13,16 @@
 						class="autocomplete"
 					/>
 					<label for="searchbar">Search</label>
+					<a
+						class="dropdown-trigger"
+						data-target="dropdown"
+						style="color: black"
+						><i class="material-icons">filter_list</i></a
+					>
+					<ul id="dropdown" class="dropdown-content">
+						<li><a onclick="filterByPrice('asc')">Price ↑</a></li>
+						<li><a onclick="filterByPrice('desc')">Price ↓</a></li>
+					</ul>
 				</div>
 				<% if(role === 'ADMIN' && token) { %>
 				<div class="input-field col s2">
@@ -31,7 +41,7 @@
 		<% for(let i = 0; i < products.length; i++) { %>
 		<div class="col s12 m6 l3 products">
 			<div class="card medium hoverable">
-				<a href="/product/<%= products[i].id %>" style="color: black;">
+				<a href="/product/<%= products[i].id %>" style="color: black">
 					<div class="card-image">
 						<img class="activator" src="<%= products[i].image %>" />
 					</div>
@@ -43,7 +53,7 @@
 						</span>
 						<p><%= products[i].info %></p>
 						<div class="card-action">
-								<b><%= products[i].price %> ₽</b>
+							<b><%= products[i].price %> ₽</b>
 						</div>
 					</div>
 				</a>
@@ -86,5 +96,48 @@
 				instance.open();
 			});
 		});
+
+		function filterByPrice(order) {
+			const productsContainer = document.querySelectorAll('.products');
+			const productsArray = Array.from(productsContainer);
+
+			productsArray.sort((a, b) => {
+				const priceA = parseInt(
+					a.querySelector('.card-action b').innerText
+				);
+				const priceB = parseInt(
+					b.querySelector('.card-action b').innerText
+				);
+				return order === 'asc' ? priceA - priceB : priceB - priceA;
+			});
+
+			const parent = productsContainer[0].parentElement;
+			parent.innerHTML = ''; // Очищаем родительский контейнер
+
+			productsArray.forEach((product) => {
+				parent.appendChild(product);
+			});
+		}
+
+		function search() {
+			const input = document
+				.getElementById('searchbar')
+				.value.trim()
+				.toLowerCase();
+			const products = document.querySelectorAll('.products');
+
+			products.forEach((product) => {
+				const productName = product
+					.querySelector('.card-title')
+					.textContent.trim()
+					.toLowerCase();
+
+				if (productName.includes(input)) {
+					product.style.display = 'block';
+				} else {
+					product.style.display = 'none';
+				}
+			});
+		}
 	</script>
 </body>
