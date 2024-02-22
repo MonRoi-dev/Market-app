@@ -75,7 +75,9 @@ class User {
 				const products = [];
 				for (const productId of user.cart) {
 					const product = await ProductModel.findById(productId);
-					products.push(product);
+					if(product){
+						products.push(product);
+					}
 				}
 				res.render('cart', { title: 'Cart', products, cart: user.cart });
 			}

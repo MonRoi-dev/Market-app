@@ -1,10 +1,12 @@
+import e from 'express';
 import ProductModel from '../models/productModel.mjs';
+import UserModel from '../models/userModel.mjs';
 
 class Product {
 	async createProduct(req, res) {
 		try {
 			const data = req.body;
-			if(!data.name){
+			if (!data.name) {
 				res.status(400).json({ message: 'Missing Name' });
 			}
 			const product = new ProductModel({
@@ -16,63 +18,74 @@ class Product {
 			await product.save();
 			res.redirect('/');
 		} catch (err) {
-			res.status(500).render('serverErrorPage', {message: `Server Error: ${err}`, title: 'Error'})
+			res.status(500).render('serverErrorPage', {
+				message: `Server Error: ${err}`,
+				title: 'Error',
+			});
 		}
 	}
 
 	async getProduct(req, res) {
 		try {
 			const id = req.params.id;
-			if(id.length !== 24){
+			if (id.length !== 24) {
 				return res.status(404).render('notFoundPage', {
-					title: 'Page not found'
+					title: 'Page not found',
 				});
 			}
 			const product = await ProductModel.findById(id);
-			if(!product){
+			if (!product) {
 				return res.status(404).render('notFoundPage', {
-					title: 'Page not found'
+					title: 'Page not found',
 				});
 			}
 			res.render('product', { title: product.name, data: product });
 		} catch (err) {
-			res.status(500).render('serverErrorPage', {message: `Server Error: ${err}`, title: 'Error'})
+			res.status(500).render('serverErrorPage', {
+				message: `Server Error: ${err}`,
+				title: 'Error',
+			});
 		}
 	}
 
 	async updateProduct(req, res) {
 		try {
-			const id = req.params.id
+			const id = req.params.id;
 			const data = req.body;
-			if(!id){
+			if (!id) {
 				res.status(400).json({ message: 'Missing data' });
 			}
-            let dataToUpdate = {}
-            for (const [key, value] of Object.entries(data)) {
-                if(value){
-                    dataToUpdate[key] = value
-                }
-              }
-			await ProductModel.findByIdAndUpdate(id, dataToUpdate,{ new: true });
+			let dataToUpdate = {};
+			for (const [key, value] of Object.entries(data)) {
+				if (value) {
+					dataToUpdate[key] = value;
+				}
+			}
+			await ProductModel.findByIdAndUpdate(id, dataToUpdate, {
+				new: true,
+			});
 			res.redirect('/');
 		} catch (err) {
-			res.status(500).render('serverErrorPage', {message: `Server Error: ${err}`, title: 'Error'})
+			res.status(500).render('serverErrorPage', {
+				message: `Server Error: ${err}`,
+				title: 'Error',
+			});
 		}
 	}
 
-    async deleteProduct(req, res){
-        try{
-            const {id} = req.params
-			if(!id){
-				res.status(400).json({ message: 'Missing id' });
-			}
-            await ProductModel.findByIdAndDelete(id);
+	async deleteProduct(req, res) {
+		try {
+			const { id } = req.params;
+			await UserModel.updateMany({}, {$pull: { cart: {_id: id} }})
+			await ProductModel.findByIdAndDelete(id);
 			res.redirect('/');
-        }catch(err){
-            res.status(500).render('serverErrorPage', {message: `Server Error: ${err}`, title: 'Error'})
-        }
-    }
-
+		} catch (err) {
+			res.status(500).render('serverErrorPage', {
+				message: `Server Error: ${err}`,
+				title: 'Error',
+			});
+		}
+	}
 }
 
 export default new Product();
