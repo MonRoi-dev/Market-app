@@ -60,7 +60,7 @@ class User {
                     await user.save();
                 }
 			}
-			res.redirect('/user/cart');
+			res.redirect('/');
 		} catch (err) {
 			res.status(500).render('serverErrorPage', {message: `Server Error: ${err}`, title: 'Error'})
 		}
