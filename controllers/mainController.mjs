@@ -6,7 +6,7 @@ class Main{
                 const getAllProducts = await ProductModel.find({})
                 res.render('index', {
                     title: 'Market app',
-                    products: getAllProducts
+                    products: getAllProducts.reverse()
                 });
             }catch(err){
                 res.status(500).render('serverErrorPage', {message: `Server Error: ${err}`, title: 'Error'})
