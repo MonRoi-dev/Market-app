@@ -1,0 +1,78 @@
+<div class="container">
+  <div class="row">
+    <h5 class="center-align"><b>Send Emails</b></h5>
+    <div class="row">
+      <div class="input-field col s6">
+        <select
+          id="send-type"
+          name="send-type"
+          onchange="toggleEmailField()"
+        >
+          <option value="1">Send to One User</option>
+          <option value="2">Send to All Users</option>
+        </select>
+        <label>Select type</label>
+      </div>
+      <form id="email-form" method="POST" action="/admin/emailOne">
+      <div class="input-field col s6" id="email-field">
+        <input
+          id="email"
+          name="email"
+          type="email"
+          class="validate"
+          required=""
+          aria-required="true"
+        />
+        <label for="email">Email</label>
+      </div>
+    </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea
+            id="text"
+            name="text"
+            class="materialize-textarea"
+            required=""
+            aria-required="true"
+          ></textarea>
+          <label for="text">Text</label>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="card-action center-align">
+    <button
+      type="submit"
+      class="btn waves-effect waves-light hoverable"
+      form="email-form"
+    >
+      Send
+    </button>
+  </div>
+</div>
+
+<script>
+   function toggleEmailField() {
+    var selectElement = document.getElementById('send-type');
+    var emailField = document.getElementById('email-field');
+    var emailInput = document.getElementById('email');
+    var formAction = document.getElementById('email-form');
+
+    if (selectElement.value === '2') {
+      emailField.style.display = 'none'; // Скрыть поле Email при выборе "Send to All Users"
+      formAction.action = '/admin/emailAll'; // Изменить action для отправки всем пользователям
+      emailInput.removeAttribute("name"); // Удалить атрибут name для поля email
+    } else {
+      emailField.style.display = 'block'; // Показать поле Email при выборе "Send to One User"
+      formAction.action = '/admin/emailOne'; // Вернуть action для отправки на одного пользователя
+      emailInput.setAttribute("name", "email"); // Добавить атрибут name для поля email обратно
+    }
+  }
+
+  // Добавляем обработчик события для формы, чтобы включить отправку поля email при отправке формы
+  document.getElementById('email-form').addEventListener('submit', function(event) {
+    if (document.getElementById('send-type').value === '2') {
+      document.getElementById('email').removeAttribute('name'); // Удаляем атрибут name, чтобы не отправлять email при выборе "Send to All Users"
+    }
+  });
+</script>
