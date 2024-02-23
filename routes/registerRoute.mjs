@@ -14,5 +14,6 @@ router.post('/register', [
         max: 16,
     })
 ],registerController.postRegister)
+router.get('/register/:token', registerController.verifyRegister)
 
 export default router

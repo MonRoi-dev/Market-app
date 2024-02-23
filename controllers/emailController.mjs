@@ -1,16 +1,6 @@
 import UserModel from '../models/userModel.mjs';
-import nodemailer from 'nodemailer'
+import { transporter } from '../middlewares/tokenMiddleware.mjs';
 import 'dotenv/config';
-
-const transporter = nodemailer.createTransport({
-    host: process.env.HOST,
-    port: 465,
-    secure: true,
-    auth: {
-      user:  process.env.USER,
-      pass:  process.env.PASS,
-    },
-  });
 
 class Email {
 	async emailOne(req, res) {

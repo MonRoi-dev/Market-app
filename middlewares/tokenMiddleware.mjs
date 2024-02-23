@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import 'dotenv/config';
+import nodemailer from 'nodemailer'
 
 const setToken = (req, res, next) => {
     try {
@@ -30,4 +31,14 @@ const setRole = (req, res, next) => {
     next()
 }
 
-export { setToken, setRole };
+const transporter = nodemailer.createTransport({
+    host: process.env.HOST,
+    port: 465,
+    secure: true,
+    auth: {
+      user:  process.env.USER,
+      pass:  process.env.PASS,
+    },
+  });
+
+export { setToken, setRole, transporter };
