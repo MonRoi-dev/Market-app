@@ -1,47 +1,81 @@
-<%- include('partials/head') %>
-<%- include('partials/navbar') %>
-    <body>
-        <% if(!cart.length) {%>
-            <h1>Cart is empty!</h1>
-            <%} else {%>
-        <table>
-            <thead>
-              <tr>
-                <th>№</th>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Total</th>
-              </tr>
-            </thead>
-            <tbody>
-                <% let totalPrice = 0 %>
-    <% for(let i = 0; i < products.length; i++) { %>
-        <% totalPrice += products[i].price * cart[i].qnty %>
-              <tr>
-                <td><%= i+1 %></td>
-                <td style="width: 2cm; height: 2cm;">
-                    <img src="<%= products[i].image %>" style="width: 2cm; height: 2cm;">
-                </td>
-                <td><%= products[i].name %></td>
-                <td><%= products[i].price %></td>
-                <td><%= cart[i].qnty%></td>
-                <td><%= products[i].price * cart[i].qnty%></td>
-                <td>
-                    <form action="/user/product/<%= products[i].id %>?_method=DELETE" method="post">
-                        <button class="btn waves-effect waves-light" type="submit" name="action">Delete
-                            <i class="material-icons right">remove_shopping_cart</i>
-                        </button>
-                    </form>
-                </td>
-              </tr>
-              <% } %>
-            </tbody>
-            </thead>
-        </table>
-        <h1>Total Products: <%= cart.reduce((acc, el) => acc += el.qnty,0)%></h1>
-        <h1>Total Price: <%= totalPrice %> ₽</h1>
-        <% } %>
-	<%- include('partials/footer') %>
+<%- include('partials/head') %> <%- include('partials/navbar') %>
+
+<body>
+	<% if(!cart.length) { %>
+	<h1>Cart is empty!</h1>
+	<% } else { %>
+	<table>
+		<thead>
+			<tr>
+				<th>№</th>
+				<th>Image</th>
+				<th>Name</th>
+				<th>Price</th>
+				<th>Quantity</th>
+				<th>Total</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% let totalPrice = 0 %> <% for(let i = 0; i < products.length; i++)
+			{ %> <% totalPrice += products[i].price * cart[i].qnty %>
+			<tr>
+				<td><%= i+1 %></td>
+				<td style="width: 2cm; height: 2cm">
+					<img
+						src="<%= products[i].image %>"
+						style="width: 2cm; height: 2cm"
+					/>
+				</td>
+				<td><%= products[i].name %></td>
+				<td><%= products[i].price %></td>
+				<td><%= cart[i].qnty %></td>
+				<td><%= products[i].price * cart[i].qnty %></td>
+				<td>
+					<form
+						action="/user/product/<%= products[i].id %>?_method=DELETE"
+						method="post"
+					>
+						<button
+							class="btn waves-effect waves-light"
+							type="submit"
+							name="action"
+						>
+							Delete
+							<i class="material-icons right"
+								>remove_shopping_cart</i
+							>
+						</button>
+					</form>
+				</td>
+			</tr>
+			<% } %>
+		</tbody>
+	</table>
+	<h1>Total Products: <%= cart.reduce((acc, el) => acc += el.qnty, 0) %></h1>
+	<h1>Total Price: <%= totalPrice %> ₽</h1>
+
+	<form action="/user/cart" method="post">
+		<input type="hidden" name="totalPrice" value="<%= totalPrice %>" />
+		<% for(let i = 0; i < products.length; i++) { %>
+		<input
+			type="hidden"
+			name="products[<%= i %>][name]"
+			value="<%= products[i].name %>"
+		/>
+		<input
+			type="hidden"
+			name="products[<%= i %>][qnty]"
+			value="<%= cart[i].qnty %>"
+		/>
+		<% } %>
+		<button
+			class="btn waves-effect waves-light"
+			type="submit"
+		>
+			Checkout
+			<i class="material-icons right">check</i>
+		</button>
+	</form>
+	<% } %> <%- include('partials/footer') %>
 </body>

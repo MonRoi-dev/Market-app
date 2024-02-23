@@ -1,0 +1,64 @@
+<%- include('partials/head') %> <%- include('partials/navbar') %>
+<body>
+	<table>
+		<thead>
+			<tr>
+				<th>№</th>
+				<th>Order ID</th>
+				<th>Order Details</th>
+				<th>Total price</th>
+				<th>User Id</th>
+				<th>Order Date</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% for(let i = 0; i < orders.length; i++) { %>
+			<tr>
+				<td><%= orders.length-i %></td>
+				<td><%= orders[i].id %></td>
+				<td>
+					<button
+						class="waves-effect waves-light btn"
+						onclick="toggleDetails(<%= i %>)"
+					>
+						Details
+					</button>
+					<table id="details<%= i %>" class="hidden">
+						<thead>
+							<tr>
+								<th>Product Name</th>
+								<th>Quantity</th>
+							</tr>
+						</thead>
+						<tbody>
+							<% orders[i].products.forEach(product => { %>
+							<tr>
+								<td><%= product.name %></td>
+								<td><%= product.qnty %></td>
+							</tr>
+							<% }); %>
+						</tbody>
+					</table>
+				</td>
+				<td><%= orders[i].totalPrice %></td>
+				<td><%= orders[i].userId %></td>
+				<td><%= orders[i].createdAt %></td>
+			</tr>
+			<% } %>
+		</tbody>
+	</table>
+	<%- include('partials/footer') %>
+</body>
+
+<style>
+	.hidden {
+		display: none;
+	}
+</style>
+
+<script>
+	function toggleDetails(orderIndex) {
+		const detailsTable = document.getElementById('details' + orderIndex);
+		detailsTable.classList.toggle('hidden');
+	}
+</script>

@@ -1,3 +1,5 @@
+import Orders from '../models/orderModel.mjs';
+
 class Admin{
     getAdmin(req, res){
         try{
@@ -15,6 +17,17 @@ class Admin{
             res.status(500).render('serverErrorPage', {message: `Server Error: ${err}`, title: 'Error'})
         }
     }
+
+    async getOrders(req, res){
+        try{
+            const orders = await Orders.find({})
+            orders.reverse()
+            res.render('orders', {title: 'Orders', orders})
+        }catch(err){
+            res.status(500).render('serverErrorPage', {message: `Server Error: ${err}`, title: 'Error'})
+        }
+    }
+
 }
 
 export default new Admin()
