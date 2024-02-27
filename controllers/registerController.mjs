@@ -45,7 +45,7 @@ class Register {
 					from: `"Market" ${process.env.USER}`,
 					to: userData.email,
 					subject: 'This mail sent automaticly do not reply!', 
-					html: `<b>http://localhost:3000/register/${token}<b>`, 
+					html: `<b>https://market-app-ywq8.onrender.com/register/${token}<b>`, 
 				  });
 			}
 			res.redirect('/');
